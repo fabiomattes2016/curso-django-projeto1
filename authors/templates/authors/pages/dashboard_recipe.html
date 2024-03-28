@@ -1,0 +1,30 @@
+{% extends 'global/base.html' %}
+
+{% block title %}Dashboard Recipe{% endblock title %}
+
+{% block content %}
+    <div class="main-content center container">
+        <h2>Dashboard Recipe</h2>
+
+        {% if request.user.is_authenticated %}
+            <br />
+            <form action="{% url 'author-logout' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="username" value="{{ request.user.username }}" />
+                <div class="form-content form-content-grid">
+                     <div class="form-group">
+                        <button type="submit">Sair</button>
+                    </div>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+
+    <div class="main-content container">
+        {% include 'global/partials/messages.html' %}
+
+        <div class="left">
+            {% include 'global/forms/form.html' %}
+        </div>
+    </div>
+{% endblock content %}
